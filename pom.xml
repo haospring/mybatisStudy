@@ -9,9 +9,6 @@
     <version>1.0-SNAPSHOT</version>
     <modules>
         <module>mybatis_03</module>
-        <module>mybatis_04</module>
-        <module>mybatis_04</module>
-        <module>mybatis_04</module>
         <module>mybatis_05</module>
         <module>mybatis_06</module>
         <module>mybatis_07_oneToMany</module>
