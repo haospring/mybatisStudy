@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.haospring.dao.StudentMapper">
+    <!--方式一：-->
+    <resultMap id="studentMap" type="student" autoMapping="true">
+        <id column="id" property="id"/>
+        <association property="teacher" javaType="teacher" autoMapping="true">
+            <id column="tid" property="id"/>
+            <result column="tname" property="name"/>
+        </association>
+    </resultMap>
+
+    <select id="queryStudentAndTeacher" resultMap="studentMap">
+        select s.*, t.id tid, t.name, t.name tname
+        from student s,
+             teacher t
+        where s.tid = t.id;
+    </select>
+
+    <!--方式2：-->
+    <select id="queryStudentAndTeacher2" resultMap="studentMap2">
+        select * from student;
+    </select>
+
+    <resultMap id="studentMap2" type="student" autoMapping="true">
+        <association property="teacher" column="tid" javaType="teacher" autoMapping="true" select="queryTeacher"/>
+    </resultMap>
+
+    <select id="queryTeacher" resultType="teacher">
+        select * from teacher where id=#{tid}
+    </select>
+</mapper>
